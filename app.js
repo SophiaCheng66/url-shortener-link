@@ -3,6 +3,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 const PORT = 3000
 const bodyParser = require('body-parser')
+const URL = require('./models/URL.js')
 const mongoose = require('mongoose')
 const db = mongoose.connection
 
@@ -50,7 +51,14 @@ app.post('/link', (req, res) => {
   }
   getData()
 
-  res.render('show', { Random: getData() })
+  URL.create({
+    name: req.body.URL,
+    key: `https://url-shortener-link.herokuapp.com/${getData()}`
+  })
+    .then(item => res.render('show', { Random: item.key, name: item.name }))
+    .catch(error => console.log(error))
+
+
 })
 
 
