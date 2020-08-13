@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 app.post('/link', (req, res) => {
   const userURL = req.body.URL
-
+  // console.log(userURL)
   function getData() {
     const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmno pqrstuvwxyz1234567890"
     // const NUMBER = data[Math.floor(Math.random() * data.length)]
@@ -52,14 +52,33 @@ app.post('/link', (req, res) => {
   getData()
 
   URL.create({
-    name: req.body.URL,
-    key: `https://url-shortener-link.herokuapp.com/${getData()}`
+    name: userURL,
+    key: `https://url-shortener-link.com/${getData()}`
   })
-    .then(item => res.render('show', { Random: item.key, name: item.name }))
+    .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id }))
+
+
     .catch(error => console.log(error))
-
-
 })
+
+app.get('/web/:id', (req, res) => {
+  // console.log(req.query)
+  const id = req.params.id
+  URL.findById(id)
+    .lean()
+    .then(item => res.redirect(`${item.name}`))
+})
+
+
+// app.get('/web/:id', (req, res) => {
+//   console.log(req.query.q)
+//   const id = req.params.id
+//   URL.findById(id)
+//     .lean()
+//     .then(item => res.render('web', { web: item }))
+// })
+
+
 
 
 app.listen(PORT, () => {

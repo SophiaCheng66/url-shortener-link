@@ -6,21 +6,20 @@
         style="width: 500px; height:300px;repeat:no-repeat">
     </div>
 
-    <form action="/link" method="post">
+    {{!-- <form action="/link" method="post"> --}}
 
+    <div>
       <div>
-        <div>
-          <h3>Success! Please use this link:</h3>
-        </div>
-
-        <div>
-          <a href="{{name}}">{{Random}}</a>
-        </div>
+        <h3>Success! Please use this link:</h3>
       </div>
 
-      <button type="submit">
-        Copy
-      </button>
-    </form>
+      <div>
+        <a id="foo" href='/web/{{Random3}}'>{{Random1}}</a>
+      </div>
+    </div>
+
+
+
+    {{!-- </form> --}}
   </div>
 </div>
