@@ -9,10 +9,10 @@ db.on('error', () => {
 })
 
 db.once('open', () => {
-
+  const getData = getData()
   URL.create({
     name: 'https://www.google.com',
-    key: 'https://www.google.com'
+    key: `${getData}`
 
   })
 

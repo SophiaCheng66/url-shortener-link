@@ -32,7 +32,7 @@ app.post('/link', (req, res) => {
   const userURL = req.body.URL
   // console.log(userURL)
   function getData() {
-    const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmno pqrstuvwxyz1234567890"
+    const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
     // const NUMBER = data[Math.floor(Math.random() * data.length)]
     let Random = ''
     for (let i = 0; i < 5; i++) {
@@ -53,32 +53,34 @@ app.post('/link', (req, res) => {
 
   URL.create({
     name: userURL,
-    key: `https://url-shortener-link.com/${getData()}`
+    key: getData()
   })
     .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id }))
-
-
     .catch(error => console.log(error))
 })
 
+
+
+
 app.get('/web/:id', (req, res) => {
-  // console.log(req.query)
+  console.log(req.params.id)
   const id = req.params.id
   URL.findById(id)
     .lean()
-    .then(item => res.redirect(`${item.name}`))
+    .then(item => res.render('web', { web: item }))
+    .catch(error => console.log(error))
 })
 
 
-// app.get('/web/:id', (req, res) => {
-//   console.log(req.query.q)
-//   const id = req.params.id
-//   URL.findById(id)
-//     .lean()
-//     .then(item => res.render('web', { web: item }))
-// })
 
 
+app.get('/:key', (req, res) => {
+  const key = req.params.key
+  console.log(req.params.key)
+  URL.findOne({ key: `${key}` })
+    .then(item => res.redirect(`${item.name}`))
+    .catch(error => console.log(error))
+})
 
 
 app.listen(PORT, () => {
