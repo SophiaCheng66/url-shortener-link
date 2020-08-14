@@ -20,7 +20,7 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
@@ -33,12 +33,13 @@ app.post('/link', (req, res) => {
   // console.log(userURL)
   function getData() {
     const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
-    // const NUMBER = data[Math.floor(Math.random() * data.length)]
+
     let Random = ''
     for (let i = 0; i < 5; i++) {
       Random += data[Math.floor(Math.random() * data.length)]
     }
 
+    // 防止有重覆的網址組合出現
     let collected = []
     if (collected.indexOf(Random) >= 0) {
       return getData()

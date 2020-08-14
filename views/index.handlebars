@@ -2,17 +2,23 @@
   <div class='row  d-flex flex-column align-items-center'>
 
     <div>
-      <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716__340.jpg"
-        style="width: 500px; height:300px;repeat:no-repeat">
+      <h4 id="title">URL Shortener</h4>
+    </div>
+
+
+    <div>
+      <img src="https://cdn.pixabay.com/photo/2019/08/27/21/24/oldtimer-4435361__340.jpg">
     </div>
 
     <form action="/link" method="post">
 
+
+      {{!-- 使用required，若使用者沒有輸入內容，就按下了送出鈕，可以防止表單送出並提示使用者  --}}
       <div>
         <input type="text" name="URL" placeholder="請輸入完整的網址，例如:http://www.google.com.tw" style="width: 600px" required>
       </div>
 
-      <button type="submit">
+      <button id="shortenButton" class="btn btn-outline-primary" type="submit">
         Shorten
       </button>
     </form>

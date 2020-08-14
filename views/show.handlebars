@@ -1,9 +1,14 @@
 <div class="container">
   <div class='row  d-flex flex-column align-items-center'>
 
+
     <div>
-      <img src="https://cdn.pixabay.com/photo/2017/01/16/17/45/pancake-1984716__340.jpg"
-        style="width: 500px; height:300px;repeat:no-repeat">
+      <h4 id="title">URL Shortener</h4>
+    </div>
+
+
+    <div>
+      <img src="https://cdn.pixabay.com/photo/2019/08/27/21/24/oldtimer-4435361__340.jpg">
     </div>
 
     {{!-- <form action="/link" method="post"> --}}
@@ -15,13 +20,13 @@
 
       <div>
         <a id="foo" href='/web/{{Random3}}'>http://localhost:3000/{{Random1}}</a>
-
-
-        <button id="btn" data-clipboard-target="#foo">
-          點選複製
-        </button>
-
       </div>
+
+      <button id="btn" class="copyButton  btn btn-primary" data-clipboard-target="#foo">
+        Copy
+      </button>
+
+
     </div>
 
 
