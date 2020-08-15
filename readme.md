@@ -39,6 +39,7 @@ npm run seed
  
  
 - 專案截圖
- 
+![image]( https://github.com/SophiaCheng66/url-shortener-link/blob/master/img/url-shortener.PNG)
+
 
 
