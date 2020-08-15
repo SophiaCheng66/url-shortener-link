@@ -1,18 +1,13 @@
-const mongoose = require('mongoose')
+
 const URL = require('../URL.js')
-const db = mongoose.connection
+const db = require('../../config/mongoose.js')
+const getData = require('../../randomData.js')
 
-mongoose.connect('mongodb://localhost/url-shortener-link', { useNewUrlParser: true, useUnifiedTopology: true })
-
-db.on('error', () => {
-  console.log('mongodb error')
-})
-
+const getData1 = getData()
 db.once('open', () => {
-  const getData = getData()
   URL.create({
     name: 'https://www.google.com',
-    key: `${getData}`
+    key: `${getData1}`
 
   })
 
