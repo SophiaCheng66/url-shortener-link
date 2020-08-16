@@ -1,5 +1,5 @@
 
-const URL = require('../URL.js')
+const URL = require('../../models/URL.js')
 const db = require('../../config/mongoose.js')
 const getData = require('../../randomData.js')
 
