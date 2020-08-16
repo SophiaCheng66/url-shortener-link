@@ -1,3 +1,4 @@
+//匯入 mongoose
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
