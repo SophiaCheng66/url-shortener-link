@@ -36,7 +36,7 @@ router.post('/link', (req, res) => {
 
   if (domainUrl !== process.env.HEROKU_URL) {
     domainUrl = 'http://localhost:3000/'
-  } else if (domainUrl !== 'http://localhost:3000/') {
+  } else if (domainUrl === process.env.HEROKU_URL) {
     domainUrl =
       'https://glacial-savannah-97000.herokuapp.com/'
   }
