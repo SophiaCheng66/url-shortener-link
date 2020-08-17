@@ -32,7 +32,7 @@ router.post('/link', (req, res) => {
   }
   getData()
 
-  const domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
+  const domainUrl = 'http://localhost:3000/' || 'https://glacial-savannah-97000.herokuapp.com/'
 
   URL.create({
     name: userURL,
