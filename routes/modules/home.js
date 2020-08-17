@@ -32,11 +32,13 @@ router.post('/link', (req, res) => {
   }
   getData()
 
+  const domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
+
   URL.create({
     name: userURL,
     key: getData()
   })
-    .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id }))
+    .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
     .catch(error => console.log(error))
 })
 
