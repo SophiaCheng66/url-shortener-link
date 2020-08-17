@@ -34,12 +34,12 @@ router.post('/link', (req, res) => {
 
   let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
 
-  if (domainUrl !== process.env.HEROKU_URL) {
-    domainUrl = 'http://localhost:3000/'
-  } else if (domainUrl === process.env.HEROKU_URL) {
-    domainUrl =
-      'https://glacial-savannah-97000.herokuapp.com/'
-  }
+  // if (domainUrl !== process.env.HEROKU_URL) {
+  //   domainUrl = 'http://localhost:3000/'
+  // } else if (domainUrl === process.env.HEROKU_URL) {
+  //   domainUrl =
+  //     'https://glacial-savannah-97000.herokuapp.com/'
+  // }
 
   URL.create({
     name: userURL,
