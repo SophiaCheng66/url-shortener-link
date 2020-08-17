@@ -4,9 +4,7 @@ const exphbs = require('express-handlebars')
 const PORT = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const URL = require('./models/URL.js')
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+
 
 const routes = require('./routes')
 require('./config/mongoose.js')
