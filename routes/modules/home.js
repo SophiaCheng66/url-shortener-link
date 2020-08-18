@@ -14,32 +14,34 @@ router.post('/link', (req, res) => {
   function getData() {
     const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
 
-    let Random = ''
+    let Random = []
     for (let i = 0; i < 5; i++) {
       Random += data[Math.floor(Math.random() * data.length)]
     }
-
-    // 防止有重覆的網址組合出現
-    let collected = []
-    if (collected.indexOf(Random) >= 0) {
-      return getData()
-    } else {
-      collected.push(Random)
-      return Random
-      // console.log(Random)
-      // console.log(collected)
-    }
+    return Random
   }
-  getData()
+
+
+
+  // 防止有重覆的網址組合出現
+  let collected = []
+  URL.find({ key: getData() })
+    .then(item => {
+      if (collected.includes(item)) {
+        return getData()
+      } else {
+        collected.push(item)
+        return item
+        // console.log(item)
+        // console.log(collected)
+      }
+    })
+
+
+
 
   let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
 
-  // if (domainUrl !== process.env.HEROKU_URL) {
-  //   domainUrl = 'http://localhost:3000/'
-  // } else if (domainUrl === process.env.HEROKU_URL) {
-  //   domainUrl =
-  //     'https://glacial-savannah-97000.herokuapp.com/'
-  // }
 
   URL.create({
     name: userURL,
@@ -48,18 +50,6 @@ router.post('/link', (req, res) => {
     .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
     .catch(error => console.log(error))
 })
-
-
-router.get('/web/:id', (req, res) => {
-  console.log(req.params.id)
-  const id = req.params.id
-  URL.findById(id)
-    .lean()
-    .then(item => res.render('web', { web: item }))
-    .catch(error => console.log(error))
-})
-
-
 
 
 
