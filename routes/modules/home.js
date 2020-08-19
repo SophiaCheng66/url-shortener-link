@@ -14,28 +14,30 @@ router.post('/link', (req, res) => {
   function getData() {
     const data = "ABCDEFGHIJKLNMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
 
-    let Random = []
+    let Random = ''
     for (let i = 0; i < 5; i++) {
       Random += data[Math.floor(Math.random() * data.length)]
     }
     return Random
   }
 
-
-
   // 防止有重覆的網址組合出現
-  let collected = []
-  URL.find({ key: getData() })
-    .then(item => {
-      if (collected.includes(item)) {
-        return getData()
-      } else {
-        collected.push(item)
-        return item
-        // console.log(item)
-        // console.log(collected)
+
+  const key = getData()
+  console.log(key)
+  URL.find()
+    .then(items => {
+      for (i = 0; i < items.length; i++) {
+        if (items[i].key.includes(key)) {
+          return getData()
+        } else {
+          // return key
+          console.log(Key)
+        }
       }
     })
+
+    .catch(error => console.log(error))
 
 
 
@@ -49,13 +51,27 @@ router.post('/link', (req, res) => {
   })
     .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
     .catch(error => console.log(error))
+
 })
+
+
+// if (items.key === key) {
+//   return getData()
+// } else {
+//   // collected.push(item)
+//   // // return item
+//   console.log(items.key)
+//   // console.log(collected)
+// }
+// console.log(items[i].key)
+
+
 
 
 
 router.get('/:key', (req, res) => {
   const key = req.params.key
-  console.log(req.params.key)
+  // console.log(req.params.key)
   URL.findOne({ key: `${key}` })
     .then(item => res.redirect(`${item.name}`))
     .catch(error => console.log(error))
