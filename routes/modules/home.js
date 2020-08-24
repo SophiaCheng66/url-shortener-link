@@ -23,34 +23,27 @@ router.post('/link', (req, res) => {
   }
 
   // 防止有重覆的網址組合出現
-  const key = getData()
+  let key = getData()
   // console.log(key)
   URL.find()
     .then(items => {
+      const shortUrls = []
+      items.forEach(item => {
+        shortUrls.push(item.key)
+      })
+      if (shortUrls.indexOf(key) !== -1) {
+        key = getData()
+      } else {
 
-      for (i = 0; i < items.length; i--) {
-        if (!items[i].key.includes(key)) {
-          return key
-          // console.log(key)
-        }
-        else {
-          return getData()
-        }
+        let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
+
+        URL.create({
+          name: userURL,
+          key: `${key}`
+        })
+          .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
       }
     })
-
-    .catch(error => console.log(error))
-
-
-
-  let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
-
-  URL.create({
-    name: userURL,
-    key: `${key}`
-  })
-    .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
-    .catch(error => console.log(error))
 
 })
 
