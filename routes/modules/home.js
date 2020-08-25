@@ -31,9 +31,11 @@ router.post('/link', (req, res) => {
       items.forEach(item => {
         shortUrls.push(item.key)
       })
-      if (shortUrls.indexOf(key) !== -1) {
+      while (shortUrls.indexOf(key) !== -1) {
         key = getData()
-      } else {
+        shortUrls.push(key)
+      }
+      if (shortUrls.indexOf(key) === -1) {
 
         let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
 
