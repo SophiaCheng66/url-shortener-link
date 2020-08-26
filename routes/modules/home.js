@@ -33,18 +33,17 @@ router.post('/link', (req, res) => {
       })
       while (shortUrls.indexOf(key) !== -1) {
         key = getData()
-        shortUrls.push(key)
       }
-      if (shortUrls.indexOf(key) === -1) {
 
-        let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
 
-        URL.create({
-          name: userURL,
-          key: `${key}`
-        })
-          .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
-      }
+      let domainUrl = process.env.HEROKU_URL || 'http://localhost:3000/'
+
+      URL.create({
+        name: userURL,
+        key: `${key}`
+      })
+        .then(item => res.render('show', { Random1: item.key, Random2: item.name, Random3: item._id, domainUrl: domainUrl }))
+
     })
 
 })
